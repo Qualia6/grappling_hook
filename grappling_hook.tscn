@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://concv6x2o2vwf"]
+
+[ext_resource type="Shader" path="res://rope.gdshader" id="1_opypn"]
+[ext_resource type="Script" path="res://grappling_hook.gd" id="1_wnpsc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fjywy"]
+render_priority = 0
+shader = ExtResource("1_opypn")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_nvnh1"]
+material = SubResource("ShaderMaterial_fjywy")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 1.0
+radial_segments = 8
+rings = 0
+cap_top = false
+cap_bottom = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_41lam"]
+albedo_color = Color(0.547293, 0.611201, 0.714132, 1)
+metallic = 1.0
+roughness = 0.57
+
+[sub_resource type="SphereMesh" id="SphereMesh_0b7d5"]
+material = SubResource("StandardMaterial3D_41lam")
+radius = 0.15
+height = 0.3
+radial_segments = 8
+rings = 5
+
+[node name="grappling hook" type="Node3D"]
+script = ExtResource("1_wnpsc")
+
+[node name="rope" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_nvnh1")
+skeleton = NodePath("../..")
+
+[node name="mount" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_0b7d5")
+skeleton = NodePath("../rope")

@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://dqdkufdacbw2l"]
+
+[ext_resource type="Script" path="res://character_body_3d.gd" id="1_qnpu5"]
+[ext_resource type="Texture2D" uid="uid://v2lwvkdtcwa4" path="res://crosshairs/x.png" id="2_4oauu"]
+[ext_resource type="Script" path="res://crosshair.gd" id="3_ouem2"]
+[ext_resource type="Shader" path="res://speed.gdshader" id="4_n2ycu"]
+[ext_resource type="Script" path="res://speed.gd" id="5_ghdwp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rp7fc"]
+shader = ExtResource("4_n2ycu")
+shader_parameter/t = 0.0
+shader_parameter/strength = 1.695
+shader_parameter/a = -0.5
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vdhes"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vceu1"]
+
+[node name="player" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.995, 0)
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+angular_damp_mode = 1
+script = ExtResource("1_qnpu5")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.392168, 0)
+current = true
+
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+target_position = Vector3(0, -20, 0)
+collision_mask = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera3D"]
+
+[node name="crosshair" type="TextureRect" parent="Camera3D/CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_4oauu")
+stretch_mode = 3
+script = ExtResource("3_ouem2")
+
+[node name="speed" type="TextureRect" parent="Camera3D/CanvasLayer"]
+material = SubResource("ShaderMaterial_rp7fc")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_vdhes")
+script = ExtResource("5_ghdwp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_vceu1")

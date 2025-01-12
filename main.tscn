@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://bmp8a4ufpyelj"]
+
+[ext_resource type="PackedScene" uid="uid://bn3q2woqt0v7n" path="res://cube.tscn" id="1_8uu2a"]
+[ext_resource type="Script" path="res://main.gd" id="1_qbrnw"]
+[ext_resource type="PackedScene" uid="uid://dqdkufdacbw2l" path="res://player.tscn" id="2_c0wxe"]
+[ext_resource type="PackedScene" uid="uid://concv6x2o2vwf" path="res://grappling_hook.tscn" id="4_qhkf3"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_o8r0j"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_7tvs7"]
+sky_material = SubResource("ProceduralSkyMaterial_o8r0j")
+
+[sub_resource type="Environment" id="Environment_a5p81"]
+background_mode = 2
+sky = SubResource("Sky_7tvs7")
+tonemap_mode = 2
+
+[node name="main" type="Node3D"]
+script = ExtResource("1_qbrnw")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_a5p81")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="world" type="Node3D" parent="."]
+
+[node name="Cube" parent="world" instance=ExtResource("1_8uu2a")]
+transform = Transform3D(24.7735, 0, 0, 0, 2.90716, 0, 0, 0, 20.4922, 0, 0, 0)
+
+[node name="Cube6" parent="world" instance=ExtResource("1_8uu2a")]
+transform = Transform3D(3.36865, 0, 0, 0, 4.61956, 0, 0, 0, 3.77157, 3.3433, 3.29021, -0.804312)
+
+[node name="Cube9" parent="world" instance=ExtResource("1_8uu2a")]
+transform = Transform3D(19.1443, 0, 0, 0, 1.12024, 0, 0, 0, 3.77157, -1.04499, 17.6128, -0.804312)
+
+[node name="Cube7" parent="world" instance=ExtResource("1_8uu2a")]
+transform = Transform3D(3.36865, 0, 0, 0, 5.13346, 0, 0, 0, 2.14239, -0.128516, 3.91951, -8.18959)
+
+[node name="Cube8" parent="world" instance=ExtResource("1_8uu2a")]
+transform = Transform3D(-5.16232e-08, 9.43663, -0.213932, 0, 4.17268, 0.483812, 1.181, 4.12488e-07, -9.35125e-09, -2.93034, 3.26809, -0.685486)
+
+[node name="Cube2" parent="world" instance=ExtResource("1_8uu2a")]
+transform = Transform3D(6.86077, 0, 0, 0, 12.7235, 0, 0, 0, 20.4922, 13.1396, 6.41059, 0)
+
+[node name="Cube5" parent="world" instance=ExtResource("1_8uu2a")]
+transform = Transform3D(6.86077, 0, 0, 0, 18.1206, 0, 0, 0, 20.4922, -13.0405, 9.12195, 0)
+
+[node name="Cube3" parent="world" instance=ExtResource("1_8uu2a")]
+transform = Transform3D(27.2568, 0, 0, 0, 10.0859, 0, 0, 0, 5.80355, 0.742933, 5.66071, -12.0627)
+
+[node name="Cube4" parent="world" instance=ExtResource("1_8uu2a")]
+transform = Transform3D(27.2568, 0, 0, 0, 14.8853, 0, 0, 0, 5.80355, 0.742933, 7.33751, 10.564)
+
+[node name="player" parent="." instance=ExtResource("2_c0wxe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.22241, -0.716371)
+
+[node name="grappling hook" parent="." instance=ExtResource("4_qhkf3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.34128, 6.39135, 7.40836)
+visible = false

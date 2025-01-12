@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bn3q2woqt0v7n"]
+
+[ext_resource type="Shader" path="res://grid.gdshader" id="1_lgshe"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_add83"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rh7d7"]
+render_priority = 0
+shader = ExtResource("1_lgshe")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3nq28"]
+
+[node name="Cube" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_add83")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_rh7d7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_3nq28")
